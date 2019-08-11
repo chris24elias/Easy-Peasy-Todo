@@ -2,7 +2,10 @@ import React from "react";
 import { useStoreActions } from "easy-peasy";
 
 const TodoItem = ({ todo }) => {
-  const toggle = useStoreActions(actions => actions.toggle);
+  const { remove, toggle } = useStoreActions(actions => ({
+    remove: actions.remove,
+    toggle: actions.toggle
+  }));
 
   return (
     <div
@@ -12,9 +15,7 @@ const TodoItem = ({ todo }) => {
       <span onClick={() => toggle(todo.id)} style={{ cursor: "pointer" }}>
         {todo.title}
       </span>
-      <button>
-        <i className="fas fa-trash-alt" />
-      </button>
+      <button onClick={() => remove(todo.id)}>delete</button>
     </div>
   );
 };
